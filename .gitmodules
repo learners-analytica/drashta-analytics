@@ -1,0 +1,3 @@
+[submodule "server/pyDrashta-ML"]
+	path = server/pyDrashta-ML
+	url = https://github.com/learners-analytica/pyDrashta-ML
