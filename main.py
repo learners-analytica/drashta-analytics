@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from service.types.appTypes import MLModel
 from dotenv import load_dotenv
 import os
 
@@ -9,8 +8,6 @@ load_dotenv()
 app = FastAPI()
 
 # Initialize Quick Data
-
-ML_model = list[MLModel] = []
 
 app.add_middleware(
     CORSMiddleware,
