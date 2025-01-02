@@ -1,44 +1,43 @@
 from flaml import AutoML
-from joblib import dump as joblib_dump
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
-from types.appTypes import MLModel
+from lib.types import MLModelTable
+import pickle
 
-def _train_automl(
-    data: DataFrame,
-    target: str,
-    time_budget: int = 60,
-    metric: str = 'accuracy',
-    task: str = None,
-    train_test_split_size: float = 0.2,
-    validation_size: float = 0.2,
-) -> AutoML:
-    """Trains an AutoML model on the given data and returns the model."""
+def request_train_model_on_data(
+    data:DataFrame,
+    target_column:str,
+    task_type: str,
+    optimization_metric: str,
+    time_limit:int,
+    model_name:str,  
+    train_split:float,
+    val_split:float,
+    test_split:float
+)->MLModelTable:
+    file_path = f'./models/{model_name}.pkl'
+    
+    X = data.drop(target_column, axis=1)
+    y = data[target_column]
+    
+    X_train, X_val_test, y_train, y_val_test = train_test_split(X, y, train_size=train_split, test_size=val_split+test_split, random_state=42)
+    X_val, X_test, y_val, y_test = train_test_split(X_val_test, y_val_test, train_size=val_split/(val_split+test_split), test_size=test_split/(val_split+test_split), random_state=42)
+    
     automl = AutoML()
-
-    X = data.drop(columns=[target])
-    y = data[target]
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=train_test_split_size, random_state=42
+    automl.fit(X_train, y_train, X_val=X_val, y_val=y_val, X_test=X_test, y_test=y_test, task=task_type, eval_metric=optimization_metric, time_limit=time_limit)
+    with open(file_path, 'wb') as f:
+        pickle.dump(automl, f)
+        
+    return MLModelTable(
+        model_name=model_name,
+        model_file_path=file_path,
+        model_data_columns=list(X.columns),
+        model_target=target_column,
+        model_task_type=task_type,
+        model_optimization_metric=optimization_metric,
+        model_eval_metric_value=automl.best_score_,
+        model_estimator_type=automl.best_estimator,
+        model_eval_metric_info=automl.metrics_for_best_config
     )
-    X_train, X_val, y_train, y_val = train_test_split(
-        X_train, y_train, test_size=validation_size, random_state=42
-    )
-
-    automl.fit(
-        X_train=X_train,
-        y_train=y_train,
-        time_budget=time_budget,
-        metric=metric,
-        task=task,
-        X_val=X_val,
-        y_val=y_val
-    )
-
-    predictions = automl.predict(X_test)
-    accuracy = (predictions == y_test).mean()
-
-    return automl
-
+        
     
