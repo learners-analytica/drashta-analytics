@@ -1,7 +1,7 @@
 from flaml import AutoML
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
-from lib.types import MLModelTable
+from libapp.types import MLModelTable
 import pickle
 
 def request_train_model_on_data(
