@@ -39,5 +39,14 @@ def request_train_model_on_data(
         model_estimator_type=automl.best_estimator,
         model_eval_metric_info=automl.metrics_for_best_config
     )
+    
+    
+def request_predict_with_model(
+    model_file_path:str,
+    data:DataFrame
+)->DataFrame:
+    with open(model_file_path, 'rb') as f:
+        automl = pickle.load(f)
+    return automl.predict(data)
         
     
