@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.encoders import jsonable_encoder
 from dotenv import load_dotenv
 import os
+from service.test import machine_test
 
 load_dotenv()
 
@@ -16,3 +18,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/test")
+async def test():
+    data = machine_test()
+    return jsonable_encoder(data)
+
