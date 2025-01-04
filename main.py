@@ -24,3 +24,4 @@ async def test():
     data = machine_test()
     return jsonable_encoder(data)
 
+
