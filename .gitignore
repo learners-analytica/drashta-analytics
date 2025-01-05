@@ -172,5 +172,5 @@ cython_debug/
 
 
 # Drashta's Runtime Files
-models/bin/*.*
-models/meta/*.*
+models/*.*
+models/*.*
