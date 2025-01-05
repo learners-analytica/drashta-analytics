@@ -1,4 +1,4 @@
-# Fair Core License, Version 1.0, ALv2 Future License
+# Learner's Analytica's Fair Core License, Version 1.0, ALv2 Future License
 
 ## Abbreviation
 
@@ -24,9 +24,9 @@ Conditions with the Software.
 
 Subject to your compliance with this License Grant and the Limitations,
 Patents, Redistribution and Trademark clauses below, we hereby grant you the
-right to use, copy, modify, create derivative works, publicly perform, publicly
-display and redistribute the Software for any Permitted Purpose identified
-below.
+right to use, copy, modify, create derivative works, publicly perform,
+publicly display and redistribute the Software for any Permitted Purpose
+identified below.
 
 ### Permitted Purpose
 
@@ -54,11 +54,11 @@ Permitted Purposes specifically include using the Software:
 
 ### Limitations
 
-You must not move, change, disable, or circumvent the license key functionality
-in the Software; or modify any portion of the Software protected by the license
-key to:
+You must not move, change, disable, or circumvent the license key
+functionality in the Software; or modify any portion of the Software protected
+by the license key to:
 
-1. enable access to the protected functionality without a valid license key; or
+1. enable access to the protected functionality without a valid license key;
 
 2. remove the protected functionality.
 
@@ -101,18 +101,14 @@ trademarks, trade names, service marks or product names.
 
 ## Grant of Future License
 
-We hereby irrevocably grant you an additional license to use the Software,
-under the Apache License, Version 2.0, that is effective on the second
-anniversary of the date we make the Software available. On or after that date,
-you may use the Software under the Apache License, Version 2.0, in which case
-the following will apply:
+We hereby irrevocably grant you an additional license to use the Software under
+the Apache License, Version 2.0, at a future time determined by us. The exact
+date for this transition will be at our discretion and will be communicated to
+you when we decide to make the software available under the Apache License,
+Version 2.0. On or after that date, the following will apply:
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License.
-
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at Apache License, Version 2.0.
 
 Unless required by applicable law or agreed to in writing, software distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
