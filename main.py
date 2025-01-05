@@ -9,18 +9,19 @@ load_dotenv()
 
 app = FastAPI()
 
+print(os.getenv("ALLOW_ORIGINS"))
 # Initialize Quick Data
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = [os.getenv("ALLOW_ORIGINS", "http://localhost:3000")],
+    allow_origins = [str(os.getenv("ALLOW_ORIGINS"))],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/test")
-async def test():
+@app.post("/test/")
+async def machine_test_api():
     data = machine_test()
     return jsonable_encoder(data)
 
