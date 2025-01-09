@@ -21,10 +21,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/test/")
-async def machine_test_api():
-    data = machine_test()
-    return jsonable_encoder(data)
+@app.post("/")
+async def root():
+    return {"message": "Analytics Service Connected"}
 
 
 @app.post("/test/")
