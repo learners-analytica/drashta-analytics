@@ -27,7 +27,7 @@ async def root():
 
 
 @app.post("/test/")
-async def machine_test_api(param1: str, param2: int):
+async def machine_test_api():
     # Use the parameters for processing
     data = machine_test()
     return jsonable_encoder(data)
