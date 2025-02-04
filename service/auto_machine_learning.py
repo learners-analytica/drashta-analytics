@@ -20,6 +20,8 @@ def request_train_model_on_data(
     X = data.drop(target_column, axis=1)
     y = data[target_column]
     
+    print(time_limit)
+    
     X_train, X_val_test, y_train, y_val_test = train_test_split(X, y, train_size=train_split, test_size=val_split+test_split, random_state=42)
     X_val, X_test, y_val, y_test = train_test_split(X_val_test, y_val_test, train_size=val_split/(val_split+test_split), test_size=test_split/(val_split+test_split), random_state=42)
     
