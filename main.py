@@ -1,11 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from drashta_types.drashta_types_data import TColumnNames
+from drashta_types.drashta_types_data import TDataArray
 from drashta_types.drashta_types_table import TTableStructure
 import httpx
 import os
 import dotenv
-import pandas
+
+from services.bridge.data_retrieval import *
 
 dotenv.load_dotenv()
 app = FastAPI()
