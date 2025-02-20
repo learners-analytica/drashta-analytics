@@ -4,7 +4,14 @@ import dotenv
 from drashta_types.drashta_types_table import TTableData
 from drashta_types.drashta_types_data import TDataArray
 import pandas
+from pydantic import BaseModel
+from typing import List
 dotenv.load_dotenv()
+
+class requestBodyRetrieveTableData(BaseModel):
+    table: str
+    columns: List[str]
+    size: int
 
 async def request_table_data(table: str, columns: list[str], size: int) -> TTableData:
     bridge_server_url = os.getenv("BRIDGE_SERVER")
