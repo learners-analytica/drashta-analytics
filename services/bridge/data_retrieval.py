@@ -33,7 +33,6 @@ async def get_table_data(table:str,columns:list[str],size:int)->TDataArray:
     return (await request_table_data(table,columns,size))["table_data_series"]
 
 async def get_table_dataframe(table:str,columns:list[str],size:int)->pandas.DataFrame:
-    
     table_data:TDataArray = await get_table_data(table,columns,size)
     df = pandas.DataFrame(table_data)
     return df
