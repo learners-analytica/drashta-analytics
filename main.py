@@ -6,7 +6,7 @@ import httpx
 import os
 import dotenv
 
-from services.bridge.data_retrieval import *
+from .services.bridge.data_retrieval import *
 
 dotenv.load_dotenv()
 app = FastAPI()
