@@ -1,12 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from drashta_types.drashta_types_data import TDataArray
-from drashta_types.drashta_types_table import TTableStructure
-import httpx
 import os
 import dotenv
 
-from .services.bridge.data_retrieval import *
+from .services.driver.model_query import TMLModelQuery, MLModelQueryHandle
 
 dotenv.load_dotenv()
 app = FastAPI()
@@ -23,26 +20,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.post("/model-gen-query")
+async def requestQueryModel(body:TMLModelQuery):
+    MLModelQueryHandle(
+        body.table,
+        body.x,
+        body.y,
+        body.model_name,
+        body.size,
+        body.task
+    )
 
-@app.get("/get-database-struct")
-async def get_database_struct()->list[TTableStructure]:
-    bridge_server_url = os.getenv("BRIDGE_SERVER")
-    
-    if not bridge_server_url:
-        raise HTTPException(status_code=500, detail="BRIDGE_SERVER environment variable is not set")
 
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(f'{bridge_server_url}/supabase/get-database-structure')
-
-        response.raise_for_status()  # This will raise an exception for bad status codes (4xx, 5xx)
-        print(response.json())
-        return response.json()  # Assuming response JSON can be mapped to TColumnNames
-    
-    except httpx.RequestError as exc:
-        raise HTTPException(status_code=500, detail=f"Request error occurred: {exc}")
-    except httpx.HTTPStatusError as exc:
-        raise HTTPException(status_code=exc.response.status_code, detail=f"HTTP error occurred: {exc}")
-    except ValueError as exc:
-        raise HTTPException(status_code=500, detail=f"Error parsing response: {exc}")
 
