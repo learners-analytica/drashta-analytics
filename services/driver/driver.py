@@ -4,7 +4,15 @@ from ..io.model_save import save_model_tensor, model_meta_data
 from ..bridge.data_retrieval import get_table_dataframe
 from drashta_types.drashta_types_key import MLTaskTypes
 from flaml.automl import AutoML
+from pydantic import BaseModel
 
+class MLModelQuery(BaseModel):
+    table: str
+    x: list[str]
+    y: str
+    model_name: str
+    size: int = 1000
+    task: MLTaskTypes = MLTaskTypes.CLASSIFICATION
 
 def MLModelQueryHandle(
     table:str,
