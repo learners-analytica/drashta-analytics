@@ -1,7 +1,6 @@
-from turtle import mode
-from ..automl.model_generation import generate_model
-from ..io.model_save import save_model_tensor, model_meta_data
-from ..bridge.data_retrieval import get_table_dataframe
+from services.automl.model_generation import generate_model
+from services.io.model_save import save_model_tensor, model_meta_data
+from services.bridge.data_retrieval import get_table_dataframe
 from drashta_types.drashta_types_key import MLTaskTypes
 from flaml.automl import AutoML
 from pydantic import BaseModel

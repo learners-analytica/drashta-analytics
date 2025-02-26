@@ -1,8 +1,5 @@
-from flaml import AutoML
-from sklearn.model_selection import train_test_split
+from flaml.automl import AutoML
 from pandas import DataFrame
-from typing import List
-from pydantic import BaseModel, confloat, Field, Annotated
 
 def generate_model(data:DataFrame, x_cols:list[str], y_cols:str, task:str, train_time:float)->AutoML:
     automl = AutoML()

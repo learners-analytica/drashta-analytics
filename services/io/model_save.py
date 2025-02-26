@@ -2,7 +2,7 @@ import safetensors
 import uuid
 from drashta_types.drashta_types_model import TModelMetadata
 from drashta_types.drashta_types_key import MLTaskTypes
-from flaml import AutoML
+from flaml.automl import AutoML
 import datetime
 import dotenv
 import os
