@@ -27,7 +27,7 @@ async def request_table_data(table: str, columns: list[str], size: int) -> TTabl
         )
         
         response.raise_for_status()
-        return response.json()  # Assuming response JSON can be mapped to TTableData
+        return response.model_dump_json()  # Assuming response JSON can be mapped to TTableData
     
 async def get_table_data(table:str,columns:list[str],size:int)->TDataArray:
     return (await request_table_data(table,columns,size))["table_data_series"]
