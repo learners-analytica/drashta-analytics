@@ -13,5 +13,5 @@ def generate_model(data:DataFrame, x_cols:list[str], y_cols:str, task:str, train
 def get_best_model(model:AutoML)->AutoML:
     return model.model
 
-def predict_model(model:AutoML, data:DataFrame)->DataFrame:
+def predict_model(model:any, data:DataFrame)->DataFrame:
     return model.predict(data)
