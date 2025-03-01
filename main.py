@@ -4,7 +4,7 @@ import os
 import dotenv
 import httpx
 
-from services.driver.model_query import TMLModelQuery, MLModelQueryHandle
+from services.driver.model_query import TMLModelQuery,TModelPredictRequest, MLModelQueryHandle, MLPredictHandle
 from services.driver.model_db import get_model_list
 from services.web.response import fetch_status, get_status_code
 
@@ -70,4 +70,6 @@ async def req_model_list():
     return get_model_list()
 
 
-
+@app.post("/run_predict_on_model")
+async def run_predict_on_model(body:TModelPredictRequest):
+    return await MLPredictHandle(body.x, body.model_id)
