@@ -1,14 +1,22 @@
 from flaml.automl import AutoML
 from pandas import DataFrame
 
-def generate_model(data:DataFrame, x_cols:list[str], y_cols:str, task:str, train_time:float)->AutoML:
+def generate_model(data: DataFrame, x_cols: list[str], y_cols: str, task: str) -> AutoML:
     automl = AutoML()
+
+    X_train = data[x_cols]
+    y_train = data[y_cols]
+
     automl.fit(
-        X=data[x_cols],
-        y=data[y_cols],
+        X_train,
+        y_train,
         task=task,
-        train_time_limit=train_time
+        time_budget=5
     )
+    
+    return automl
+
+
 
 def get_best_model(model:AutoML)->AutoML:
     return model.model
