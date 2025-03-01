@@ -5,7 +5,9 @@ import dotenv
 import httpx
 
 from services.driver.model_query import TMLModelQuery, MLModelQueryHandle
+from services.driver.model_db import get_model_list
 from services.web.response import fetch_status, get_status_code
+
 
 dotenv.load_dotenv()
 app = FastAPI()
@@ -52,7 +54,7 @@ async def root():
 
 @app.post("/model-gen-query")
 async def requestQueryModel(body:TMLModelQuery):
-    MLModelQueryHandle(
+    a = await MLModelQueryHandle(
         body.table,
         body.x,
         body.y,
@@ -60,6 +62,12 @@ async def requestQueryModel(body:TMLModelQuery):
         body.size,
         body.task
     )
+    print(a)
+    return a
+
+@app.get("/model_list")
+async def req_model_list():
+    return get_model_list()
 
 
 
