@@ -15,6 +15,10 @@ class TMLModelQuery(BaseModel):
     model_name: str
     size: int = 1000
     task: MLTaskTypes = MLTaskTypes.CLASSIFICATION
+    
+class TModelPredictRequest(BaseModel):
+    x: TDataArray
+    model_id: str
 
 def MLModelQueryHandle(
     table:str,
@@ -36,7 +40,7 @@ def MLModelQueryHandle(
     )
     model_filename = save_model_tensor(meta_data,model)
     add_new_model(meta_data,model_filename)
-    return model
+    return meta_data
 
 def MLPredictHandle(
     x:TDataArray,
