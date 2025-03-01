@@ -31,4 +31,10 @@ def save_model_tensor(model_meta_data:TModelMetadata,model:AutoML):
     return file_name
 
 def load_model_tensor(file_name):
-    return pickle.load(file_name)
+    try:
+        with open(file_name, 'rb') as f:
+            model = pickle.load(f)
+        return model
+    except Exception as e:
+        print(f"An error occurred while loading the model: {e}")
+        return None
