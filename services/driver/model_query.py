@@ -1,4 +1,5 @@
 import pandas
+import numpy
 from services.automl.model_generation import generate_model, predict_model
 from services.io.model_io import save_model_tensor, model_meta_data, load_model_tensor
 from services.bridge.data_retrieval import get_table_dataframe
@@ -6,6 +7,7 @@ from services.io.model_database_CURD import fetch_model_data, Model_DB_Fields, a
 from drashta_types.drashta_types_key import MLTaskTypes
 from drashta_types.drashta_types_data import TDataArray
 from flaml.automl import AutoML
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 
 class TMLModelQuery(BaseModel):
@@ -15,7 +17,7 @@ class TMLModelQuery(BaseModel):
     model_name: str
     size: int = 1000
     task: MLTaskTypes = MLTaskTypes.CLASSIFICATION
-    
+
 class TModelPredictRequest(BaseModel):
     x: TDataArray
     model_id: str
@@ -47,8 +49,13 @@ async def MLPredictHandle(
     model_id:str
     ):
     model_data:Model_DB_Fields = fetch_model_data(model_id)
+    print(model_data.file_path)
     model_tensor = load_model_tensor(model_data.file_path)
     data = pandas.DataFrame(x)
     preds = predict_model(model_tensor,data)
-    return preds
+    if isinstance(preds, numpy.ndarray):
+        preds = preds.tolist()
+    elif isinstance(preds, pandas.DataFrame):
+        preds = preds.to_dict(orient="records")
+    return jsonable_encoder({"predictions": preds})
     
