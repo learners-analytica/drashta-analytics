@@ -4,6 +4,7 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 from drashta_types.drashta_types_model import TModelMetadata
 from drashta_types.drashta_types_key import MLTaskTypes
 import datetime
+import json
 from pydantic import create_model
 import dotenv
 import os
@@ -13,7 +14,7 @@ dotenv.load_dotenv()
 class Model_DB_Fields(SQLModel, table=True):
     id: str = Field(primary_key=True)
     model_name: str = Field(index=True)
-    data: str
+    columns: str
     target: str
     date: datetime.datetime = Field(default_factory=datetime.datetime.utcnow)
     task: MLTaskTypes
@@ -43,7 +44,7 @@ def add_new_model(model_meta:TModelMetadata,file_name:str):
     model_entry = Model_DB_Fields(
         id = model_meta.id,
         model_name= model_meta.name,
-        data = ",".join(model_meta.data),
+        data = json.dumps(model_meta.columns),
         target= model_meta.target,
         task=model_meta.task,
         estimator=model_meta.estimator,
