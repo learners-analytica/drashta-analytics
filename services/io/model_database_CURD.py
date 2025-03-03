@@ -53,4 +53,13 @@ def add_new_model(model_meta:TModelMetadata,file_name:str):
         session.add(model_entry)
         session.commit()
     
-    
+def remove_model(id:str)->bool:
+    with Session(engine) as session:
+        statement = select(Model_DB_Fields).where(Model_DB_Fields.id == id)
+        model_data = session.exec(statement).first()
+        if model_data:
+            session.delete(model_data)
+            session.commit()
+            return True
+        else:
+            return False

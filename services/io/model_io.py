@@ -38,3 +38,9 @@ def load_model_tensor(file_name):
     except Exception as e:
         print(f"An error occurred while loading the model: {e}")
         return None
+
+def rm_model_tensor(file_name):
+    try:
+        os.remove(file_name)
+    except Exception as e:
+        print(f"An error occurred while removing the model: {e}")
