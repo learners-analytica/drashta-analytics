@@ -17,7 +17,6 @@ def generate_model(data: DataFrame, x_cols: list[str], y_cols: str, task: str) -
     return automl
 
 
-
 def get_best_model(model:AutoML)->AutoML:
     return model.model
 
