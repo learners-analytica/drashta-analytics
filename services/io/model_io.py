@@ -11,7 +11,7 @@ import pickle
 
 dotenv.load_dotenv()
 
-def model_meta_data(model_name:str,x_var:list[TDataSeriesMinimal],target:list[str],task:MLTaskTypes,estimator:str)->TModelMetadata:
+def model_meta_data(model_name:str,x_var:list[TDataSeriesMinimal],target:list[TDataSeriesMinimal],task:MLTaskTypes,estimator:str)->TModelMetadata:
     meta_data = TModelMetadata(
         id=str(uuid4()),
         name = model_name,
