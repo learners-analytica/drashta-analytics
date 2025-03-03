@@ -174,3 +174,7 @@ cython_debug/
 # Drashta's Runtime Files
 models/*.*
 models/*.*
+
+
+# Model Database file
+.db
