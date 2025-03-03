@@ -2,7 +2,8 @@ import safetensors
 from uuid import uuid4
 from drashta_types.drashta_types_model import TModelMetadata
 from drashta_types.drashta_types_key import MLTaskTypes
-from flaml.automl import AutoML
+from drashta_types.drashta_types_data import TDataSeriesMinimal
+from flaml import AutoML
 import datetime
 import dotenv
 import os
@@ -10,11 +11,11 @@ import pickle
 
 dotenv.load_dotenv()
 
-def model_meta_data(model_name:str,x_var:list[str],target:list[str],task:MLTaskTypes,estimator:str)->TModelMetadata:
+def model_meta_data(model_name:str,x_var:list[TDataSeriesMinimal],target:list[str],task:MLTaskTypes,estimator:str)->TModelMetadata:
     meta_data = TModelMetadata(
         id=str(uuid4()),
         name = model_name,
-        data = x_var,
+        columns = x_var,
         target = target,
         date = datetime.datetime.now().strftime("%Y-%m-%d"),
         task = task,
