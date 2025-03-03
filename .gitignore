@@ -177,4 +177,4 @@ models/*.*
 
 
 # Model Database file
-.db
+*.db
