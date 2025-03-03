@@ -1,11 +1,13 @@
+from os import remove
 import pandas
 import numpy
 from services.automl.model_generation import generate_model, predict_model
-from services.io.model_io import save_model_tensor, model_meta_data, load_model_tensor
+from services.io.model_io import save_model_tensor, model_meta_data, load_model_tensor, rm_model_tensor
 from services.bridge.data_retrieval import get_table_dataframe
-from services.io.model_database_CURD import fetch_model_data, Model_DB_Fields, add_new_model
+from services.io.model_database_CURD import fetch_model_data, Model_DB_Fields, add_new_model, remove_model, fetch_model_list
 from drashta_types.drashta_types_key import MLTaskTypes
 from drashta_types.drashta_types_data import TDataArray
+from drashta_types.drashta_types_model import TModelMetadata
 from flaml.automl import AutoML
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
@@ -22,7 +24,10 @@ class TModelPredictRequest(BaseModel):
     x: TDataArray
     model_id: str
 
-async def MLModelQueryHandle(
+class TModelData(BaseModel):
+    id:str
+
+async def model_query_handle(
     table:str,
     x_columns:list[str],
     y:str,
@@ -44,7 +49,7 @@ async def MLModelQueryHandle(
     add_new_model(meta_data,model_filename)
     return meta_data
 
-async def MLPredictHandle(
+async def model_predict_handle(
     x:TDataArray,
     model_id:str
     ):
@@ -58,4 +63,12 @@ async def MLPredictHandle(
     elif isinstance(preds, pandas.DataFrame):
         preds = preds.to_dict(orient="records")
     return jsonable_encoder({"predictions": preds})
-    
+
+async def MLModelRemove(
+    model_id: TModelData
+    ):
+    if rm_model_tensor(model_id.id):
+        remove_model(model_id)
+
+async def get_model_list()->list[TModelMetadata]:
+    return fetch_model_list()
