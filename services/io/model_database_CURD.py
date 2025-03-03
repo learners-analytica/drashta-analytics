@@ -45,7 +45,7 @@ def add_new_model(model_meta:TModelMetadata,file_name:str):
         id = model_meta.id,
         model_name= model_meta.name,
         data = json.dumps(model_meta.columns),
-        target= model_meta.target,
+        target= json.dumps(model_meta.target),
         task=model_meta.task,
         estimator=model_meta.estimator,
         file_path = file_name
