@@ -3,10 +3,10 @@ import pandas
 import numpy
 from services.automl.model_generation import generate_model, predict_model
 from services.io.model_io import save_model_tensor, model_meta_data, load_model_tensor, rm_model_tensor
-from services.bridge.data_retrieval import get_table_dataframe
+from services.bridge.data_retrieval import get_table_dataframe, request_column_data
 from services.io.model_database_CURD import fetch_model_data, Model_DB_Fields, add_new_model, remove_model, fetch_model_list
 from drashta_types.drashta_types_key import MLTaskTypes
-from drashta_types.drashta_types_data import TDataArray
+from drashta_types.drashta_types_data import TDataArray, TDataSeriesHead, TDataSeriesMinimal
 from drashta_types.drashta_types_model import TModelMetadata
 from flaml.automl import AutoML
 from fastapi.encoders import jsonable_encoder
@@ -36,7 +36,9 @@ async def model_query_handle(
     task:MLTaskTypes = MLTaskTypes.CLASSIFICATION,
     ):
     cols = x_columns + [y]
-    data = await get_table_dataframe(table,cols,size)
+    data = await get_table_dataframe(table,cols,size) 
+    raw_columns_data:list[TDataSeriesHead] = await request_column_data(table,cols)
+    minimal_columns_data:list[TDataSeriesMinimal] = [{key: item[key] for key in [TDataSeriesHead.column_name, TDataSeriesHead.column_type]} for item in raw_columns_data]
     model:AutoML = generate_model(data,x_columns,y,task.value)
     meta_data = model_meta_data(
         model_name,
