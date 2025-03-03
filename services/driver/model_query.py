@@ -38,10 +38,13 @@ async def model_query_handle(
     cols = x_columns + [y]
     data = await get_table_dataframe(table,cols,size) 
     raw_columns_data:list[TDataSeriesHead] = await request_column_data(table,cols)
-    minimal_columns_data:list[TDataSeriesMinimal] = [{key: item[key] for key in [TDataSeriesHead.column_name, TDataSeriesHead.column_type]} for item in raw_columns_data]
+    minimal_columns_data:list[TDataSeriesMinimal] = raw_columns_data
+    x_rows  = [row for row in minimal_columns_data if row.column_name in x_columns]
+    target = [row for row in minimal_columns_data if row.column_name in y]
     model:AutoML = generate_model(data,x_columns,y,task.value)
-    x_rows = filtered_rows = [row for row in minimal_columns_data if row[TDataSeriesMinimal.column_name] in x_columns]
-    target = filtered_rows = [row for row in minimal_columns_data if row[TDataSeriesMinimal.column_name] in [y]][0]
+
+    print(y)
+    print(target)
     meta_data = model_meta_data(
         model_name,
         x_rows,

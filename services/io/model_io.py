@@ -8,10 +8,11 @@ import datetime
 import dotenv
 import os
 import pickle
-
+import json
 dotenv.load_dotenv()
 
 def model_meta_data(model_name:str,x_var:list[TDataSeriesMinimal],target:list[TDataSeriesMinimal],task:MLTaskTypes,estimator:str)->TModelMetadata:
+    print(f'metadata save targetas : {target}')
     meta_data = TModelMetadata(
         id=str(uuid4()),
         name = model_name,
