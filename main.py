@@ -4,7 +4,7 @@ import os
 import dotenv
 import httpx
 
-from services.driver.model_query import TMLModelQuery,TModelPredictRequest, model_query_handle, model_predict_handle, get_model_list
+from services.driver.model_query import TMLModelQuery,TModelPredictRequest,TModelData, model_query_handle, model_predict_handle, get_model_list, get_model_metadata, remove_model
 from services.driver.model_db import get_model_list
 from services.web.response import fetch_status, get_status_code
 
@@ -66,6 +66,14 @@ async def requestQueryModel(body:TMLModelQuery):
 @app.get("/model-list")
 async def req_model_list():
     return get_model_list()
+
+@app.post("/model-details")
+async def get_model(body:TModelData):
+    return get_model_metadata(body)
+
+@app.post("/remove-model")
+async def remove_model(body:TModelData):
+    return remove_model(body)
 
 @app.post("/run-predict-on-model")
 async def run_predict_on_model(body:TModelPredictRequest):
