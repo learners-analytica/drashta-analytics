@@ -76,6 +76,11 @@ async def MLModelRemove(
     ):
     if rm_model_tensor(model_id.id):
         remove_model(model_id)
-
 async def get_model_list()->list[TModelMetadata]:
     return fetch_model_list()
+
+async def get_model_metadata(model_id:TModelData)->TModelMetadata:
+    return fetch_model_data(model_id.id)
+
+async def remove_model(model_id:TModelData)->bool:
+    return remove_model(model_id.id)
