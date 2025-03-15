@@ -63,10 +63,10 @@ async def requestQueryModel(body:TMLModelQuery):
         body.task
     )
 
-@app.get("/model_list")
+@app.get("/model-list")
 async def req_model_list():
     return get_model_list()
 
-@app.post("/run_predict_on_model")
+@app.post("/run-predict-on-model")
 async def run_predict_on_model(body:TModelPredictRequest):
     return await model_predict_handle(body.x, body.model_id)
