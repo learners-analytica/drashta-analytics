@@ -59,12 +59,12 @@ def fetch_model_list()->list[TModelMetadata]:
         model_list = convert_to_tmodel_metadata(model_data_stringed)
         return model_list
 
-def fetch_model_data(id:str)->Model_DB_Fields:
+async def fetch_model_data(id:str)->Model_DB_Fields:
     with Session(engine) as session:
         statement = select(Model_DB_Fields).where(Model_DB_Fields.id == id)
         model_data_stringed = session.exec(statement).first()
-        model_data = convert_to_tmodel_metadata(model_data_stringed)
-        return model_data
+        model_data = convert_to_tmodel_metadata([model_data_stringed])
+        return model_data[0]
 
 def add_new_model(model_meta:TModelMetadata,file_name:str):
     model_entry = Model_DB_Fields(

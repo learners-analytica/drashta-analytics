@@ -25,6 +25,7 @@ def model_meta_data(model_name:str,x_var:list[TDataSeriesMinimal],target:list[TD
     return meta_data
 
 def save_model_tensor(model_meta_data:TModelMetadata,model:AutoML):
+    
     model_dir = os.getenv("MODEL_DIR")
     print(f'MODEL DIR {model_dir}')
     file_name = f"{model_dir}/{model_meta_data.name}_{model_meta_data.id}.safetensors"

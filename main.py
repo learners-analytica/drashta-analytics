@@ -69,7 +69,7 @@ async def req_model_list():
 
 @app.post("/model-details")
 async def get_model(body:TModelData):
-    return get_model_metadata(body)
+    return await get_model_metadata(body)
 
 @app.post("/remove-model")
 async def remove_model(body:TModelData):
