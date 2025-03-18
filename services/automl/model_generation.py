@@ -6,12 +6,14 @@ def generate_model(data: DataFrame, x_cols: list[str], y_cols: str, task: str) -
 
     X_train = data[x_cols]
     y_train = data[y_cols]
+    n_splits = len(X_train) if len(X_train) < 5 else 5
 
     automl.fit(
         X_train,
         y_train,
         task=task,
-        time_budget=5
+        time_budget=5,
+        n_splits=n_splits,
     )
     
     return automl
