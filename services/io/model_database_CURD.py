@@ -90,3 +90,9 @@ def remove_model(id:str)->bool:
             return True
         else:
             return False
+
+def fetch_model_filepath(id:str)->str:
+    with Session(engine) as session:
+        statement = select(Model_DB_Fields).where(Model_DB_Fields.id == id)
+        model_data = session.exec(statement).first()
+        return model_data.file_path

@@ -15,6 +15,7 @@ from services.io.model_database_CURD import (
     add_new_model,
     remove_model,
     fetch_model_list,
+    fetch_model_filepath
 )
 from drashta_types.drashta_types_key import MLTaskTypes
 from drashta_types.drashta_types_data import (
@@ -78,7 +79,7 @@ async def model_query_handle(
 
 
 async def model_predict_handle(x: TDataArray, model_id: str):
-    model_data: Model_DB_Fields = await fetch_model_data(model_id)
+    model_data: Model_DB_Fields = await fetch_model_filepath(model_id)
     print(model_data)
     model_tensor = load_model_tensor(model_data.file_path)
     data = pandas.DataFrame(x)
