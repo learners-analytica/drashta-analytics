@@ -59,8 +59,9 @@ async def requestQueryModel(body:TMLModelQuery):
         body.x,
         body.y,
         body.model_name,
+        body.time_budget,
         body.size,
-        body.task
+        body.task,
     )
 
 @app.get("/model-list")

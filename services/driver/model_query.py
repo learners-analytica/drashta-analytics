@@ -36,6 +36,7 @@ class TMLModelQuery(BaseModel):
     model_name: str
     size: int = 1000
     task: MLTaskTypes = MLTaskTypes.CLASSIFICATION
+    time_budget:int
 
 
 class TModelPredictRequest(BaseModel):
@@ -52,8 +53,9 @@ async def model_query_handle(
     x_columns: list[str],
     y: str,
     model_name: str,
+    time_budget:int,
     size: int = 1000,
-    task: MLTaskTypes = MLTaskTypes.CLASSIFICATION,
+    task: MLTaskTypes = MLTaskTypes.CLASSIFICATION
 ):
     cols = x_columns + [y]
     data = await get_table_dataframe(table, cols, size)
@@ -61,7 +63,7 @@ async def model_query_handle(
     minimal_columns_data: list[TDataSeriesMinimal] = raw_columns_data
     x_rows = [row for row in minimal_columns_data if row.column_name in x_columns]
     target = [row for row in minimal_columns_data if row.column_name in y]
-    model: AutoML = generate_model(data, x_columns, y, task.value)
+    model: AutoML = generate_model(data, x_columns, y, task.value, time_budget=time_budget)
 
     print(y)
     print(target)
