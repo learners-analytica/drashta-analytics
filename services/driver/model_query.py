@@ -15,8 +15,7 @@ from services.io.model_database_CURD import (
     add_new_model,
     fetch_model_full,
     remove_model,
-    fetch_model_list,
-    fetch_model_filepath
+    fetch_model_list
 )
 from drashta_types.drashta_types_key import MLTaskTypes
 from drashta_types.drashta_types_data import (
