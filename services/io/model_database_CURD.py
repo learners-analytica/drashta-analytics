@@ -91,8 +91,8 @@ def remove_model(id:str)->bool:
         else:
             return False
 
-async def fetch_model_filepath(id:str)->str:
+async def fetch_model_full(id:str)->Model_DB_Fields:
     with Session(engine) as session:
         statement = select(Model_DB_Fields).where(Model_DB_Fields.id == id)
         model_data = session.exec(statement).first()
-        return model_data.file_path
+        return model_data

@@ -13,6 +13,7 @@ from services.io.model_database_CURD import (
     fetch_model_data,
     Model_DB_Fields,
     add_new_model,
+    fetch_model_full,
     remove_model,
     fetch_model_list,
     fetch_model_filepath
@@ -79,8 +80,8 @@ async def model_query_handle(
 
 
 async def model_predict_handle(x: TDataArray, model_id: str):
-    model_data: Model_DB_Fields = await fetch_model_filepath(model_id)
-    print(model_data)
+    model_data: Model_DB_Fields = await fetch_model_full(model_id)
+    print(model_data.file_path)
     model_tensor = load_model_tensor(model_data.file_path)
     data = pandas.DataFrame(x)
     preds = predict_model(model_tensor, data)
