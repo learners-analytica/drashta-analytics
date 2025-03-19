@@ -79,14 +79,14 @@ async def model_query_handle(
 
 async def model_predict_handle(x: TDataArray, model_id: str):
     model_data: Model_DB_Fields = await fetch_model_data(model_id)
-    #print(model_data.file_path)
+    print(model_data)
     model_tensor = load_model_tensor(model_data.file_path)
     data = pandas.DataFrame(x)
     preds = predict_model(model_tensor, data)
-    if isinstance(preds, numpy.ndarray):
-        preds = preds.tolist()
-    elif isinstance(preds, pandas.DataFrame):
-        preds = preds.to_dict(orient="records")
+    #if isinstance(preds, numpy.ndarray):
+    #    preds = preds.tolist()
+    #elif isinstance(preds, pandas.DataFrame):
+    #    preds = preds.to_dict(orient="records")
     return jsonable_encoder({"predictions": preds})
 
 
