@@ -1,7 +1,7 @@
 from flaml.automl import AutoML
 from pandas import DataFrame
 
-def generate_model(data: DataFrame, x_cols: list[str], y_cols: str, task: str) -> AutoML:
+def generate_model(data: DataFrame, x_cols: list[str], y_cols: str, task: str, time_budget:int) -> AutoML:
     automl = AutoML()
 
     X_train = data[x_cols]
@@ -12,7 +12,7 @@ def generate_model(data: DataFrame, x_cols: list[str], y_cols: str, task: str) -
         X_train,
         y_train,
         task=task,
-        time_budget=5,
+        time_budget=time_budget,
         n_splits=n_splits,
     )
     
