@@ -1,4 +1,3 @@
-import safetensors
 from uuid import uuid4
 from drashta_types.drashta_types_model import TModelMetadata
 from drashta_types.drashta_types_key import MLTaskTypes
@@ -28,7 +27,7 @@ def save_model_tensor(model_meta_data:TModelMetadata,model:AutoML):
     
     model_dir = os.getenv("MODEL_DIR")
     print(f'MODEL DIR {model_dir}')
-    file_name = f"{model_dir}/{model_meta_data.name}_{model_meta_data.id}.safetensors"
+    file_name = f"{model_dir}/{model_meta_data.name}_{model_meta_data.id}.pickle"
     with open(file_name, "wb") as f:
         pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
     return file_name
