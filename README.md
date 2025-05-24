@@ -9,7 +9,7 @@ Service for Model Training for the Drashta Demo System running on FastAPI
 
 1. AutoML Model Training : Trains Models using FLAML
 2. Brdige Service Data Retrival : Retrives Data for model training using [Drashta Bridge](https://github.com/learners-analytica/drashta-bridge) and splits as per the request
-3. Model Registry : Stores Model Files and hold metadata in a SQLite File including `model_name` , `columns` (input columns for model) , `target` (target column of model), task type of the model and estimator used
+3. Model Registry : Stores Model Files and hold metadata in a SQLite File including `model_name` , `columns` (input columns for model) , `target` (target column of model), `task` and `estimator`
 
 # Packages 
 See `requirements.txt`
