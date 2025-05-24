@@ -21,5 +21,7 @@ Service for Model Training for the Drashta Demo System running on FastAPI
 * Run the following Commands in Sequence
 
 run `pip install -r requirements.txt`
+
 run `fastapi run main.py`
+
 open [`0.0.0.0:8000`](http://0.0.0.0:8000) 
