@@ -12,8 +12,8 @@ Service for Model Training for the Drashta Demo System running on FastAPI
 3. Model Registry : Stores Model Files and hold metadata in a SQLite File including `model_name` , `columns` (input columns for model) , `target` (target column of model), `task` and `estimator`
 
 # Packages 
-See `requirements.txt`
-Depends on a currently depriciated types library [`drashta-types-py`](https://github.com/learners-analytica/drashta-types-py)
+* See `requirements.txt`
+* Depends on a currently depriciated types library [`drashta-types-py`](https://github.com/learners-analytica/drashta-types-py)
 
 # Running
 1. Create a `Python 3.13` enviroment
