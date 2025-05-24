@@ -16,6 +16,10 @@ Service for Model Training for the Drashta Demo System running on FastAPI
 * Depends on a currently depriciated types library [`drashta-types-py`](https://github.com/learners-analytica/drashta-types-py)
 
 # Running
-1. Create a `Python 3.13` enviroment
-2. run `pip install -r requirements.txt`
-3. run `fastapi run main.py`
+
+* Create a `Python 3.13` enviroment
+* Run the following Commands in Sequence
+
+run `pip install -r requirements.txt`
+run `fastapi run main.py`
+open [`0.0.0.0:8000`](http://0.0.0.0:8000) 
